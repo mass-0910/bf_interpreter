@@ -12,25 +12,6 @@ struct src_char{
     int index;
 };
 
-int isBrainfuckCharacter(char c){
-    switch(c){
-        case '>':
-        case '<':
-        case '+':
-        case '-':
-        case '.':
-        case ',':
-        case '[':
-        case ']':
-        case '\n':
-        case ' ':
-        case '\t':
-            return 0;
-        default:
-            return -1;
-    }
-}
-
 int readBrainfuckSource(char *fileName, struct src_char **head){
     FILE *fp;
     char cbuf;
@@ -45,14 +26,6 @@ int readBrainfuckSource(char *fileName, struct src_char **head){
     p = head;
 
     while((cbuf = fgetc(fp)) != EOF){
-
-        // character exception
-        if(isBrainfuckCharacter(cbuf) == -1){
-            printf("%c is not a Brainf**k character.\n", cbuf);
-            return -1;
-        }
-        if(cbuf == ' ' || cbuf == '\n' || cbuf == '\t')continue;
-
         *p = malloc(sizeof(struct src_char));
         (*p)->chara = cbuf;
         (*p)->loopto = NULL;
